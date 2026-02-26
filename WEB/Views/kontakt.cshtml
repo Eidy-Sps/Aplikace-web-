@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Kontakt";
+}
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css" />
+    <title>Kontakt – Atletika</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+
+            <div class="header-left">
+                <img src="~/obrazky/ingebrigtsen.jpg" class="header-img small-img" />
+            </div>
+
+            <div class="header-center">
+                <h1>Kontakt</h1>
+            </div>
+
+            <div class="header-right"></div>
+
+        </div>
+    </header>
+
+
+    <nav class="menu">
+        <ul>
+            <li><a asp-controller="Home" asp-action="Index">Domů</a></li>
+            <li><a asp-controller="Home" asp-action="Plan">Tréninkový plán</a></li>
+            <li><a asp-controller="Home" asp-action="Kontakt">Kontakt</a></li>
+        </ul>
+    </nav>
+
+
+    <section id="kontakt-info">
+        <h2>Kontaktujte mě</h2>
+
+        <p>
+            Email:
+            <a href="mailto:adam@gmail.com">
+                adam@gmail.com
+            </a>
+        </p>
+
+        <p>Telefon: +420 789 562 555</p>
+    </section>
+
+
+    <section class="back-section">
+        <a asp-controller="Home" asp-action="Index" class="back-button">
+            ← Zpět na hlavní stránku
+        </a>
+    </section>
+
+
+    <footer>
+        <p>© 2025 Atletika — Adam</p>
+    </footer>
+
+</body>
+</html>
