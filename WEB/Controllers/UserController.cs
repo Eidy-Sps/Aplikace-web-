@@ -10,65 +10,36 @@ namespace WEB.Controllers
 {
     public class UserController : Controller
     {
-        // GET: /User/Register
-        public IActionResult Register()
-        {
-            return View();
-        }
+        public IActionResult Register() => View();
 
         [HttpPost]
         public IActionResult Register(string email, string password)
         {
-            // Přidání uživatele do simulované databáze
-            FakeDatabase.Users.Add(new User
-            {
-                Email = email,
-                Password = password
-            });
-
+            FakeDatabase.Users.Add(new User { Email = email, Password = password });
             return RedirectToAction("Login");
         }
 
-        // GET: /User/Login
-        public IActionResult Login()
-        {
-            return View();
-        }
+        public IActionResult Login() => View();
 
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var user = FakeDatabase.Users
-                .FirstOrDefault(u => u.Email == email && u.Password == password);
-
+            var user = FakeDatabase.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
             if (user == null)
             {
-                ViewBag.Error = "Špatné přihlašovací údaje";
+                ViewBag.Error = "Špatné jméno nebo heslo";
                 return View();
             }
 
-            // Vytvoření identity uživatele (přihlášení)
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Email)
-            };
-
-            var identity = new ClaimsIdentity(
-                claims,
-                CookieAuthenticationDefaults.AuthenticationScheme);
-
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(identity));
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
             return RedirectToAction("Profile");
         }
 
-        [Authorize] // Přístup pouze pro přihlášené
-        public IActionResult Profile()
-        {
-            return View();
-        }
+        [Authorize]
+        public IActionResult Profile() => View();
 
         public async Task<IActionResult> Logout()
         {

@@ -3,36 +3,52 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Moje Aplikace</title>
+    <title>@ViewData["Title"] - Atletika</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
+
     <header>
-        <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-            <a asp-controller="Home" asp-action="Index">Domů</a> |
+        <div class="header-container">
+            <div class="header-left">
+                <img src="~/obrazky/obrazek 2.jpg" alt="Logo" class="header-img">
+            </div>
+            <div class="header-center">
+                <h1>Atletika – Běh</h1>
+            </div>
+            <div class="header-right">
+                <img src="~/obrazky/ingebrigtsen.jpg" alt="Jakob" class="header-img">
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="/">Domů</a></li>
+            <li><a href="/Home/Plan">Tréninkový plán</a></li>
+            <li><a href="/Home/Reference">Reference</a></li>
+            <li><a href="/Home/Kontakt">Kontakt</a></li>
 
             @if (User.Identity?.IsAuthenticated == true)
             {
-                <span>Přihlášen jako: <strong>@User.Identity.Name</strong></span>
-                <a asp-controller="User" asp-action="Profile">Můj Profil</a>
-                <a asp-controller="User" asp-action="Logout" style="color:red">Odhlásit se</a>
+                <li><a asp-controller="User" asp-action="Profile" class="auth-btn-menu">Profil</a></li>
+                <li><a asp-controller="User" asp-action="Logout" style="color: #ff4d4d;">Odhlásit</a></li>
             }
             else
             {
-                <a asp-controller="User" asp-action="Login">Přihlášení</a>
-                <a asp-controller="User" asp-action="Register">Registrace</a>
+                <li><a asp-controller="User" asp-action="Login" class="auth-btn-menu">Přihlášení</a></li>
+                <li><a asp-controller="User" asp-action="Register" class="auth-btn-menu">Registrace</a></li>
             }
-        </nav>
-    </header>
+        </ul>
+    </nav>
 
-    <main style="padding: 20px;">
+    <main>
         @RenderBody()
     </main>
 
-    <footer style="margin-top: 20px; padding: 10px; border-top: 1px solid #eee;">
-        &copy; 2026 - WEB Aplikace
+    <footer>
+        <p>© 2026 Atletika — Adam</p>
     </footer>
 
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

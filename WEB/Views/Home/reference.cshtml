@@ -2,184 +2,96 @@
     ViewData["Title"] = "Reference";
 }
 
-<header>
-    <div class="header-container">
-
-        <div class="header-left">
-            <img src="~/obrazky/obrazek 2.jpg" alt="Logo atletiky" class="header-img small-img" />
-        </div>
-
-        <div class="header-center">
-            <h1>Atletika – Reference</h1>
-        </div>
-
-        <div class="header-right">
-            <img src="~/obrazky/ingebrigtsen.jpg" alt="Jakob Ingebrigtsen" class="header-img" />
-        </div>
-
-    </div>
-</header>
-
-
-<nav class="menu">
-    <ul>
-
-        <li><a href="/">Domů</a></li>
-
-        <li><a href="/Home/Plan">Tréninkový plán</a></li>
-
-        <li><a href="/Home/Reference">Reference</a></li> 
-
-        <li><a href="/Home/Kontakt">Kontakt</a></li>
-
-    </ul>
-</nav>
-
-
+@* POZNÁMKA: Header, Menu a Footer jsou v souboru _Layout.cshtml. 
+   Tento soubor obsahuje pouze vnitřní obsah stránky.
+*@
 
 <main class="reference-container">
 
-
     <div class="big-box">
-
         <div class="small-box left-box">
-
             <h3>Tréninkový plán</h3>
-
             <p>
                 Výrazné zlepšení výkonu a lepší struktura tréninků.
             </p>
-
         </div>
 
-
         <div class="small-box right-box">
-
             <h3>Hodnocení</h3>
-
             <p>
                 ⭐⭐⭐⭐⭐
             </p>
-
         </div>
-
     </div>
 
-
-
     <div class="big-box">
-
         <div class="small-box left-box">
-
             <h3>Technika běhu</h3>
-
             <p>
                 Zlepšení stylu běhu a ekonomiky pohybu.
             </p>
-
         </div>
 
-
         <div class="small-box right-box">
-
             <h3>Hodnocení</h3>
-
             <p>
                 ⭐⭐⭐⭐
             </p>
-
         </div>
-
     </div>
 
-
-
     <div class="big-box">
-
         <div class="small-box left-box">
-
             <h3>Kondice</h3>
-
             <p>
                 Vyšší vytrvalost a lepší rychlost.
             </p>
-
         </div>
 
-
         <div class="small-box right-box">
-
             <h3>Hodnocení</h3>
-
             <p>
                 ⭐⭐⭐⭐⭐
             </p>
-
         </div>
-
     </div>
 
-
-
     <div class="big-box">
-
         <div class="small-box left-box">
-
             <h3>Regenerace</h3>
-
             <p>
                 Menší únava a rychlejší zotavení.
             </p>
-
         </div>
 
-
         <div class="small-box right-box">
-
             <h3>Hodnocení</h3>
-
             <p>
                 ⭐⭐⭐⭐
             </p>
-
         </div>
-
     </div>
 
-
-
     <div class="big-box">
-
         <div class="small-box left-box">
-
             <h3>Celkový přístup</h3>
-
             <p>
                 Individuální přístup a vysoká motivace.
             </p>
-
         </div>
 
-
         <div class="small-box right-box">
-
             <h3>Hodnocení</h3>
-
             <p>
                 ⭐⭐⭐⭐⭐
             </p>
-
         </div>
-
     </div>
-
 
 </main>
 
-
-
-<footer>
-
-    <p>© 2025 Atletika — Adam</p>
-
-</footer>
+<section class="back-section">
+    <a asp-controller="Home" asp-action="Index" class="back-button">
+        ← Zpět na hlavní stránku
+    </a>
+</section>
