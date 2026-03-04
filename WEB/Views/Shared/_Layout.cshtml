@@ -3,17 +3,36 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>@ViewData["Title"]</title>
-
-    <!-- Tvoje CSS -->
+    <title>@ViewData["Title"] - Moje Aplikace</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-
 <body>
+    <header>
+        <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
+            <a asp-controller="Home" asp-action="Index">Domů</a> |
 
-    @RenderBody()
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <span>Přihlášen jako: <strong>@User.Identity.Name</strong></span>
+                <a asp-controller="User" asp-action="Profile">Můj Profil</a>
+                <a asp-controller="User" asp-action="Logout" style="color:red">Odhlásit se</a>
+            }
+            else
+            {
+                <a asp-controller="User" asp-action="Login">Přihlášení</a>
+                <a asp-controller="User" asp-action="Register">Registrace</a>
+            }
+        </nav>
+    </header>
 
+    <main style="padding: 20px;">
+        @RenderBody()
+    </main>
+
+    <footer style="margin-top: 20px; padding: 10px; border-top: 1px solid #eee;">
+        &copy; 2026 - WEB Aplikace
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>

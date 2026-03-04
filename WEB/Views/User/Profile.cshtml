@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Můj Profil";
+}
+
+<h2>Vítejte ve svém profilu!</h2>
+<p>Jste přihlášen pod e-mailem: <strong>@User.Identity?.Name</strong></p>
+
+<a asp-controller="User" asp-action="Logout">Odhlásit se</a>
