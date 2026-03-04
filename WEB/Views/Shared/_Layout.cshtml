@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-
     <header>
         <div class="header-container">
             <div class="header-left">
@@ -21,14 +20,12 @@
             </div>
         </div>
     </header>
-
     <nav class="menu">
         <ul>
             <li><a href="/">Domů</a></li>
             <li><a href="/Home/Plan">Tréninkový plán</a></li>
             <li><a href="/Home/Reference">Reference</a></li>
             <li><a href="/Home/Kontakt">Kontakt</a></li>
-
             @if (User.Identity?.IsAuthenticated == true)
             {
                 <li><a asp-controller="User" asp-action="Profile" class="auth-btn-menu">Profil</a></li>
@@ -41,14 +38,12 @@
             }
         </ul>
     </nav>
-
     <main>
         @RenderBody()
     </main>
-
     <footer>
         <p>© 2026 Atletika — Adam</p>
     </footer>
-
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
