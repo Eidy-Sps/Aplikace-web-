@@ -2,7 +2,10 @@
     ViewData["Title"] = "Můj Profil";
 }
 
-<h2>Vítejte ve svém profilu!</h2>
-<p>Jste přihlášen pod e-mailem: <strong>@User.Identity?.Name</strong></p>
-
-<a asp-controller="User" asp-action="Logout">Odhlásit se</a>
+<div class="auth-box">
+    <h2>Vítejte ve svém profilu!</h2>
+    <p>Jste přihlášen pod e-mailem: <strong>@User.Identity?.Name</strong></p>
+    <a asp-controller="User" asp-action="Logout" class="back-button" style="display:inline-block; margin-top:20px;">
+        Odhlásit se
+    </a>
+</div>

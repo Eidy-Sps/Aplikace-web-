@@ -2,18 +2,16 @@
     ViewData["Title"] = "Registrace";
 }
 
-<h2>Registrace</h2>
-
-<form asp-controller="User" asp-action="Register" method="post">
-    <div>
-        <label>Email:</label><br />
-        <input type="email" name="email" required />
-    </div>
-    <br />
-    <div>
-        <label>Heslo:</label><br />
-        <input type="password" name="password" required />
-    </div>
-    <br />
-    <button type="submit">Registrovat</button>
-</form>
+<div class="auth-box">
+    <h2>Registrace</h2>
+    @if (ViewBag.Error != null)
+    {
+        <p style="color:red; font-weight:bold; margin-bottom:10px;">@ViewBag.Error</p>
+    }
+    <form asp-controller="User" asp-action="Register" method="post">
+        <input type="email" name="email" class="auth-input" placeholder="Váš Email" required />
+        <input type="password" name="password" class="auth-input" placeholder="Heslo" required />
+        <button type="submit" class="auth-submit">Registrovat</button>
+    </form>
+    <p style="margin-top:15px;">Již máte účet? <a asp-action="Login" style="color:#ff4d4d;">Přihlaste se</a></p>
+</div>
