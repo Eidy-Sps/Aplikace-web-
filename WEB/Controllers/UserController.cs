@@ -25,6 +25,19 @@ namespace WEB.Controllers
         [HttpPost]
         public IActionResult Register(string email, string password)
         {
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                ViewBag.Error = "Vyplň email i heslo.";
+                return View();
+            }
+
+            var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser != null)
+            {
+                ViewBag.Error = "Tento email už je zaregistrovaný.";
+                return View();
+            }
+
             var user = new User
             {
                 Email = email,
@@ -45,6 +58,12 @@ namespace WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                ViewBag.Error = "Vyplň email i heslo.";
+                return View();
+            }
+
             var user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
 
             if (user == null)

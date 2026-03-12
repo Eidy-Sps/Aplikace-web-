@@ -10,14 +10,12 @@ namespace WEB
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Přidání služeb pro MVC
             builder.Services.AddControllersWithViews();
 
-            // Přidání DbContextu
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Konfigurace přihlašování přes cookies
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
