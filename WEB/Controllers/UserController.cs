@@ -10,40 +10,71 @@ namespace WEB.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Register() => View();
+        private readonly AppDbContext _context;
+
+        public UserController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Register(string email, string password)
         {
-            FakeDatabase.Users.Add(new User { Email = email, Password = password });
+            var user = new User
+            {
+                Email = email,
+                Password = password
+            };
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
             return RedirectToAction("Login");
         }
 
-        public IActionResult Login() => View();
+        public IActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var user = FakeDatabase.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+
             if (user == null)
             {
                 ViewBag.Error = "Špatné jméno nebo heslo";
                 return View();
             }
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Email)
+            };
+
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             return RedirectToAction("Profile");
         }
 
         [Authorize]
-        public IActionResult Profile() => View();
+        public IActionResult Profile()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
     }

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using WEB.Data;
 
 namespace WEB
 {
@@ -8,10 +10,14 @@ namespace WEB
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Přidání služeb pro MVC (Controllery a View)
+            // Přidání služeb pro MVC
             builder.Services.AddControllersWithViews();
 
-            // Konfigurace přihlašování (Cookies)
+            // Přidání DbContextu
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Konfigurace přihlašování přes cookies
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -27,12 +33,9 @@ namespace WEB
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            // --- TADY BYLA CHYBA: Chybělo načítání statických souborů (CSS, obrázky) ---
             app.UseStaticFiles();
-
             app.UseRouting();
 
-            // Autentizace MUSÍ být před Autorizací
             app.UseAuthentication();
             app.UseAuthorization();
 
