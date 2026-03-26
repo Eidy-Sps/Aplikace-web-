@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WEB.Data;
@@ -11,10 +12,12 @@ namespace WEB.Controllers
     public class UserController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly PasswordHasher<User> _passwordHasher;
 
         public UserController(AppDbContext context)
         {
             _context = context;
+            _passwordHasher = new PasswordHasher<User>();
         }
 
         public IActionResult Register()
@@ -31,11 +34,19 @@ namespace WEB.Controllers
                 return View();
             }
 
+            var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser != null)
+            {
+                ViewBag.Error = "Tento email už je zaregistrovaný";
+                return View();
+            }
+
             var user = new User
             {
-                Email = email,
-                Password = password
+                Email = email
             };
+
+            user.Password = _passwordHasher.HashPassword(user, password);
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -51,9 +62,17 @@ namespace WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
             if (user == null)
+            {
+                ViewBag.Error = "Špatné jméno nebo heslo";
+                return View();
+            }
+
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
+
+            if (result == PasswordVerificationResult.Failed)
             {
                 ViewBag.Error = "Špatné jméno nebo heslo";
                 return View();
