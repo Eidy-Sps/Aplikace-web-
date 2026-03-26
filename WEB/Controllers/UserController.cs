@@ -27,7 +27,8 @@ namespace WEB.Controllers
         {
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                return Content("Email nebo heslo je prázdné");
+                ViewBag.Error = "Email nebo heslo je prázdné";
+                return View();
             }
 
             var user = new User
@@ -39,7 +40,7 @@ namespace WEB.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            return Content("ULOŽENO DO DATABÁZE");
+            return RedirectToAction("Login");
         }
 
         public IActionResult Login()
