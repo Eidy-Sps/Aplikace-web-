@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Nová poznámka";
+}
+
+<div class="page-shell">
+    <div class="page-topbar">
+        <div>
+            <span class="page-badge">Soukromý obsah</span>
+            <h2>Nová poznámka</h2>
+            <p class="page-subtitle">Sem si můžete uložit vlastní poznámku. Uvidíte ji jen vy po přihlášení.</p>
+        </div>
+    </div>
+
+    <div class="note-form-card">
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert-box alert-error">@ViewBag.Error</div>
+        }
+
+        <form asp-controller="Notes" asp-action="Create" method="post">
+            <label class="form-label" for="title">Název poznámky</label>
+            <input id="title" type="text" name="title" class="auth-input" placeholder="Např. Trénink na 1500 m" required />
+
+            <label class="form-label" for="content">Text poznámky</label>
+            <textarea id="content" name="content" class="note-textarea" placeholder="Sem napiš obsah poznámky..." required></textarea>
+
+            <div class="note-form-actions">
+                <button type="submit" class="auth-submit">Uložit poznámku</button>
+                <a asp-controller="Notes" asp-action="Index" class="secondary-link-btn">Zobrazit moje poznámky</a>
+            </div>
+        </form>
+    </div>
+</div>

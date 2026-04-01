@@ -14,22 +14,29 @@
             </div>
             <div class="header-center">
                 <h1>Atletika – Běh</h1>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <p class="logged-user">Přihlášený uživatel: <strong>@User.Identity?.Name</strong></p>
+                }
             </div>
             <div class="header-right">
                 <img src="~/obrazky/ingebrigtsen.jpg" alt="Jakob" class="header-img">
             </div>
         </div>
     </header>
+
     <nav class="menu">
         <ul>
             <li><a href="/">Domů</a></li>
             <li><a href="/Home/Plan">Tréninkový plán</a></li>
             <li><a href="/Home/Reference">Reference</a></li>
             <li><a href="/Home/Kontakt">Kontakt</a></li>
+
             @if (User.Identity?.IsAuthenticated == true)
             {
-                <li><a asp-controller="User" asp-action="Profile" class="auth-btn-menu">Profil</a></li>
-                <li><a asp-controller="User" asp-action="Logout" style="color: #ff4d4d;">Odhlásit</a></li>
+                <li><a asp-controller="Notes" asp-action="Create" class="auth-btn-menu">Nová poznámka</a></li>
+                <li><a asp-controller="Notes" asp-action="Index" class="auth-btn-menu">Moje poznámky</a></li>
+                <li><a asp-controller="User" asp-action="Logout" style="color: #ffb3b3;">Odhlásit</a></li>
             }
             else
             {
@@ -38,12 +45,15 @@
             }
         </ul>
     </nav>
+
     <main>
         @RenderBody()
     </main>
+
     <footer>
         <p>© 2026 Atletika — Adam</p>
     </footer>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

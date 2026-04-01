@@ -1,0 +1,47 @@
+﻿@model List<WEB.Models.Note>
+
+@{
+    ViewData["Title"] = "Moje poznámky";
+}
+
+<div class="page-shell">
+    <div class="page-topbar notes-topbar">
+        <div>
+            <span class="page-badge">Přihlášený uživatel</span>
+            <h2>Moje poznámky</h2>
+            <p class="page-subtitle">Tady vidíte jen svoje uložené poznámky. Po vypnutí webu zůstanou v databázi.</p>
+        </div>
+
+        <a asp-controller="Notes" asp-action="Create" class="home-btn primary-btn">+ Nová poznámka</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert-box alert-success">@TempData["Success"]</div>
+    }
+
+    @if (Model.Count == 0)
+    {
+        <div class="empty-notes-card">
+            <div class="empty-notes-icon">📝</div>
+            <h3>Zatím tu nemáte žádnou poznámku</h3>
+            <p>Vytvořte si první poznámku a uloží se přímo do databáze.</p>
+            <a asp-controller="Notes" asp-action="Create" class="home-btn primary-btn">Vytvořit první poznámku</a>
+        </div>
+    }
+    else
+    {
+        <div class="notes-grid">
+            @foreach (var note in Model)
+            {
+                <article class="note-card">
+                    <div class="note-card-header">
+                        <h3>@note.Title</h3>
+                        <span class="note-date">@note.CreatedAt.ToString("dd.MM.yyyy HH:mm")</span>
+                    </div>
+                    <p class="note-content">@note.Content</p>
+                </article>
+            }
+        </div>
+    }
+</div>

@@ -51,6 +51,7 @@ namespace WEB.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
+            TempData["Success"] = "Registrace proběhla úspěšně. Teď se můžete přihlásit.";
             return RedirectToAction("Login");
         }
 
@@ -80,6 +81,7 @@ namespace WEB.Controllers
 
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Email)
             };
 
@@ -88,7 +90,7 @@ namespace WEB.Controllers
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            return RedirectToAction("Profile");
+            return RedirectToAction("Index", "Notes");
         }
 
         [Authorize]
