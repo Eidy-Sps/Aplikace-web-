@@ -11,7 +11,6 @@ body {
     line-height: 1.6;
 }
 
-/* ================= HEADER ================= */
 header {
     background: linear-gradient(to right, #c62828, #8e0000);
     padding: 25px 40px;
@@ -35,7 +34,6 @@ header h1 {
     text-align: center;
 }
 
-/* ================= MENU ================= */
 .menu {
     background: #222;
 }
@@ -65,14 +63,12 @@ header h1 {
             border-radius: 6px;
         }
 
-/* NOVÁ TLAČÍTKA V MENU */
 .auth-btn-menu {
     background-color: #ff4d4d;
     border-radius: 30px !important;
     padding: 8px 20px !important;
 }
 
-/* ================= AUTH BOX (Login/Register) ================= */
 .auth-box {
     max-width: 450px;
     margin: 60px auto;
@@ -109,7 +105,6 @@ header h1 {
     margin-top: 10px;
 }
 
-/* ================= SECTIONS & TABLE ================= */
 section {
     width: 80%;
     max-width: 900px;
@@ -152,4 +147,176 @@ footer {
     color: white;
     margin-top: 40px;
     border-top: 3px solid #ff4d4d;
+}
+
+/* REFERENCE */
+
+.reference-page {
+    width: 85%;
+    max-width: 1150px;
+    margin: 40px auto;
+}
+
+.reference-hero {
+    background: linear-gradient(135deg, #ffffff, #fff5f5);
+    border-radius: 22px;
+    padding: 40px 35px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0d6d6;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.reference-badge {
+    display: inline-block;
+    background: #ffebeb;
+    color: #c62828;
+    font-weight: bold;
+    padding: 8px 18px;
+    border-radius: 999px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.reference-hero h2 {
+    border: none;
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    color: #222;
+}
+
+.reference-hero p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.reference-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.reference-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ececec;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+    .reference-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+    }
+
+.reference-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.reference-icon {
+    min-width: 56px;
+    height: 56px;
+    background: linear-gradient(to right, #c62828, #ff4d4d);
+    color: white;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 6px 14px rgba(198, 40, 40, 0.25);
+}
+
+.reference-card h3 {
+    font-size: 1.35rem;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.reference-card p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.reference-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid #eee;
+}
+
+.rating-label {
+    font-weight: bold;
+    color: #555;
+    font-size: 0.98rem;
+}
+
+.stars {
+    color: #f5b301;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.back-section {
+    text-align: center;
+}
+
+.back-button {
+    display: inline-block;
+    background: linear-gradient(to right, #c62828, #ff4d4d);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 14px 28px;
+    border-radius: 999px;
+    transition: 0.3s;
+    box-shadow: 0 8px 18px rgba(198, 40, 40, 0.2);
+}
+
+    .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(198, 40, 40, 0.28);
+    }
+
+@media (max-width: 900px) {
+    .reference-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reference-hero {
+        padding: 30px 24px;
+    }
+
+        .reference-hero h2 {
+            font-size: 1.8rem;
+        }
+}
+
+@media (max-width: 600px) {
+    .reference-page {
+        width: 92%;
+    }
+
+    .reference-card {
+        padding: 20px;
+    }
+
+    .reference-card-top {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .reference-rating {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
